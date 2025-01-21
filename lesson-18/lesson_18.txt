@@ -1,0 +1,28 @@
+
+/* create a stored procedure, that will check if my number is perfect or not */
+
+create proc check_perfectnumber 
+	@number1 int
+as
+begin
+	declare @sum int = 0;
+	declare @divisor int =1;
+	while @divisor<@number1
+	begin
+		if @number1%@divisor=0
+		begin
+			set @sum=@sum+@divisor;
+		end
+		set @divisor=@divisor+1;
+		end
+		if @sum=@number1
+		begin
+			print('This number is perfect');
+		end
+		else
+		begin
+			print ('This number is not perfect');
+		end
+end;
+exec check_perfectnumber 28
+			
