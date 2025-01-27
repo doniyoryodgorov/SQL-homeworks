@@ -1,0 +1,25 @@
+Declare @birthDate datetime = '1995-01-01'
+DEclare @currentDate datetime = getdate()
+SELECT CONCAT( 
+    
+    DATEDIFF(YEAR, @birthDate, @currentDate) - 
+    CASE 
+        WHEN MONTH(@currentDate) < MONTH(@birthDate) 
+            OR (MONTH(@currentDate) = MONTH(@birthDate) AND DAY(@currentDate) < DAY(@birthDate)) 
+        THEN 1 ELSE 0 
+    END, ' years ',
+    
+    (MONTH(@currentDate) - MONTH(@birthDate) + 12) % 12 , ' months ',
+
+    
+    DATEDIFF(DAY, 
+        DATEADD(MONTH, 
+            DATEDIFF(MONTH, @birthDate, @currentDate) -
+            CASE 
+                WHEN DAY(@currentDate) < DAY(@birthDate) THEN 1 ELSE 0 
+            END, 
+        @birthDate), 
+    @currentDate), ' days ')
+
+
+	Declare @age datetime = '1995-01-01'

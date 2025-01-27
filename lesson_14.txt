@@ -1,0 +1,17 @@
+--task1
+select concat(upper(substring(name, 1, 1)), lower(substring(name, 2, len(name)))) from Employees
+
+select lower(substring(name, 1, len(name) - 1)) + upper(substring(name, len(name), 1)) from Employees
+
+--task2
+select id, 
+		CHARINDEX(',', name),
+		SUBSTRING(name, 1, CHARINDEX(',', name) - 1) as firstName, 
+		SUBSTRING(name, CHARINDEX(',', name) + 1, len(name)) as lastName
+from TestMultipleColumns
+
+--task3
+
+select * from employees_palindrome
+where name = REVERSE(name)
+
